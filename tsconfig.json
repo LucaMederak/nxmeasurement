@@ -14,7 +14,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src"
   },
-  "include": ["src", "**/*.ts", "**/*.tsx", "jest.config.js"]
+  "extends": "./tsconfig.paths.json",
+  "include": ["src", "**/*.ts", "**/*.tsx", "jest.config.js", "craco.config.js"]
 }

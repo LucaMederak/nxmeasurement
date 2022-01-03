@@ -1,24 +1,50 @@
-import React from "react";
-//components
-import Button from "@components/button/Button";
+import React, { useEffect } from "react";
 
-//theme
+//routes
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+//context
+import { SidebarViewProvider } from "@context/sidebarView";
+import { useDarkMode } from "@context/darkMode";
+
+//routes
+import MainRoutes from "@routes/mainRoutes/Main.routes";
+import ProtectedRoutes from "@routes/dashboardRoutes/Dashboard.routes";
+
+//redux
+import { useDispatch } from "react-redux";
+import { getUser } from "@redux/user/user.actions";
+
+//styles
 import GlobalStyle from "@theme/globalStyle";
-import { theme } from "@theme/theme";
 import { ThemeProvider } from "styled-components";
+import { defaultTheme, darkTheme } from "@theme/theme";
 
-function App() {
+const App = () => {
+  const { darkMode } = useDarkMode();
+  const dispatch = useDispatch();
+
+  const theme = darkMode ? darkTheme : defaultTheme;
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <div>
-          <Button>hello</Button>
-          hello world
-        </div>
+        <SidebarViewProvider>
+          <Router>
+            <Routes>
+              <Route path="/*" element={<MainRoutes />} />
+              <Route path="/dashboard/*" element={<ProtectedRoutes />} />
+            </Routes>
+          </Router>
+        </SidebarViewProvider>
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;

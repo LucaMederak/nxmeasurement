@@ -2,11 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider as StoreProvider } from "react-redux";
+import { DarkModeProvider } from "@context/darkMode";
+import { store } from "./redux/store";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StoreProvider store={store}>
+    <DarkModeProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </DarkModeProvider>
+  </StoreProvider>,
   document.getElementById("root")
 );
 

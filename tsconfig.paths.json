@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@views/*": ["./views/*"],
       "@components/*": ["./components/*"],
       "@redux/*": ["./redux/*"],
       "@theme/*": ["./theme/*"],
@@ -11,7 +12,9 @@
       "@helpers/*": ["./helpers/*"],
       "@utils/*": ["./utils/*"],
       "@icons/*": ["./icons/*"],
-      "@interfaces/*": ["./interfaces/*"]
+      "@interfaces/*": ["./interfaces/*"],
+      "@routes/*": ["./routes/*"],
+      "@animations/*": ["./animations/*"]
     }
   }
 }

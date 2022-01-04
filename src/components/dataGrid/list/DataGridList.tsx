@@ -17,7 +17,6 @@ import EmptyGrid from "../emptyGrid/EmptyGrid";
 
 //animations
 import { AnimatePresence } from "framer-motion";
-
 //interfaces
 import { IDataGridListProps } from "./DataGridList.interfaces";
 

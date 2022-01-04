@@ -117,6 +117,7 @@ const DashboardLinkActiveItem = styled.div(
     min-height: 6rem;
     padding-left: 2rem;
     background: ${palette.primary.main};
+    z-index: 2;
 
     svg {
       width: 2rem;

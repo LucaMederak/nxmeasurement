@@ -10,6 +10,7 @@ const DataGridListContainer = styled.div(
   }) => css`
     width: 100%;
     position: relative;
+    z-index: 1;
   `
 );
 

@@ -53,22 +53,22 @@ const CheckedPopup = ({ checkedRows, deleteAction }: ICheckedPopupProps) => {
         exit="hidden"
       >
         <p>{rowsLength()}</p>
-        <Button variant="data-delete-primary" width="15rem">
+        {/* <Button variant="data-delete-primary" width="15rem">
           <Icon.FaTrash />
           usuń
-        </Button>
-        <span onClick={() => setModalOpen(true)}>
+        </Button> */}
+        {/* <span onClick={() => setModalOpen(true)}>
           <Icon.FaEllipsisV />
-        </span>
+        </span> */}
       </Styled.CheckedPopupWrapper>
-      {modalOpen && (
+      {/* {modalOpen && (
         <Styled.PhoneModal ref={modalRef}>
           <Button variant="data-delete-primary" width="15rem">
             <Icon.FaTrash />
             usuń
           </Button>
         </Styled.PhoneModal>
-      )}
+      )} */}
     </>
   );
 };

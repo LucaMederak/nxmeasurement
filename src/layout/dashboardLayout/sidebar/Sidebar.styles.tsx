@@ -78,16 +78,6 @@ const SidebarList = styled.ul<IDarkMode & ISidebarView>(
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    /* @media (max-width: 1000px) {
-    position: fixed;
-    top: 6rem;
-    left: 0;
-    z-index: 3;
-    display: ${({ sidebarView }) => !sidebarView && "none"};
-    min-height: calc(100vh - 6rem);
-    background: ${({ sidebarView }) => sidebarView && "white"};
-  } */
   `
 );
 
@@ -147,17 +137,7 @@ const SidebarItem = styled.li<IActiveNavLink>(
           }
         }
       }
-    `}/* @media (max-width: 1000px) {
-    a {
-      color: ${({ theme }) => theme.palette.secondary.main};
-    }
-
-    svg {
-      path {
-        fill: ${({ theme }) => theme.palette.secondary.main};
-      }
-    }
-  } */
+    `}
   `
 );
 

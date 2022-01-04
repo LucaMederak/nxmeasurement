@@ -36,7 +36,7 @@ interface IErrorClients {
 }
 
 export interface IClientsState {
-  clients: IClientsData[] | [];
+  clients: IClientsData[];
   loading: boolean;
   error: boolean;
 }

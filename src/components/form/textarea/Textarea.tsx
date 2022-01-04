@@ -11,8 +11,6 @@ const Textarea = ({
   name,
   label,
   value,
-  onChange,
-  onBlur,
   width = "100%",
   ...textareaProps
 }: ITextareaProps) => {

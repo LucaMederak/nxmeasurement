@@ -17,7 +17,6 @@ const DataGridNav = ({
   query,
   setQuery,
   data,
-  setExportPopupDisplay,
   linkPage,
 }: IDataGridNavProps) => {
   const navigate = useNavigate();

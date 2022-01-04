@@ -83,13 +83,7 @@ const DataGridListHeaderItem = styled.div(
 );
 
 const DataGridListConfig = styled.div(
-  ({
-    theme: {
-      palette,
-      media: { breakpoints, down, up },
-      typography: { fontSize, fontWeight },
-    },
-  }) => css`
+  () => css`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +97,6 @@ const DataGridListRowsWrapper = styled.div(
     theme: {
       palette,
       media: { breakpoints, down },
-      typography: { fontSize, fontWeight },
       layout: { border },
     },
   }) => css`
@@ -121,14 +114,7 @@ const DataGridListRowsWrapper = styled.div(
 );
 
 const DataGridListRow = styled.div(
-  ({
-    theme: {
-      palette,
-      media: { breakpoints, down },
-      typography: { fontSize, fontWeight },
-      layout: { border },
-    },
-  }) => css`
+  ({ theme: { palette } }) => css`
     display: flex;
     border-bottom: 1px solid ${palette.common.contrast};
     padding: 1rem 0;
@@ -146,9 +132,8 @@ const DataGridListRowItem = styled.div(
   ({
     theme: {
       palette,
-      media: { breakpoints, down, up },
+      media: { breakpoints, up },
       typography: { fontSize, fontWeight },
-      layout: { border },
     },
   }) => css`
     display: flex;
@@ -194,16 +179,6 @@ const DataGridListPopup = styled.div`
   z-index: 2;
 `;
 
-const DataGridListPopupItem = styled.div`
-  width: 100%;
-  border-bottom: 1px solid lightgrey;
-  color: black;
-  background: ${({ disabledItem }) => disabledItem && "lightgrey"};
-  cursor: pointer;
-  pointer-events: ${({ disabledItem }) => disabledItem && "none"};
-  display: ${({ offItem }) => offItem && "none"};
-`;
-
 export {
   DataGridListContainer,
   DataGridListWrapper,
@@ -214,5 +189,4 @@ export {
   DataGridListRow,
   DataGridListRowItem,
   DataGridListPopup,
-  DataGridListPopupItem,
 };

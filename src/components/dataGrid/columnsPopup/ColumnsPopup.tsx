@@ -24,8 +24,8 @@ const ColumnsPopup = ({
   const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = (e: React.ChangeEvent<HTMLDivElement>) => {
-      if (!popupRef.current?.contains(e.target)) {
+    const handler = (e: MouseEvent) => {
+      if (!popupRef.current?.contains(e.target as Node)) {
         setPopup(false);
       }
     };

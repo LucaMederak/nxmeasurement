@@ -108,7 +108,7 @@ const NewMeasurement = () => {
       ymca,
     };
 
-    dispatch(addMeasurement(measurementValues));
+    dispatch(addMeasurement(measurementValues as any));
     actions.resetForm();
     actions.setSubmitting(false);
     navigate("/dashboard/measurements");

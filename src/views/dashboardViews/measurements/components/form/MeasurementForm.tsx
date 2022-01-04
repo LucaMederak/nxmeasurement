@@ -6,7 +6,6 @@ import {
   FormikStepper,
 } from "@components/form/multistepContainer/MultistepContainer";
 
-import Heading from "@components/form/heading/FormHeading";
 import TextField from "@components/form/textField/TextField";
 import Autocomplete from "@components/form/autocomplete/Autocomplete";
 import Textarea from "@components/form/textarea/Textarea";
@@ -40,7 +39,7 @@ const NewMeasurementForm = ({
       initialValues={{
         ...initialValues,
       }}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit as any}
     >
       <FormikStep
         validationSchema={FORM_BASIC_INFO_VALIDATION_SCHEMA}
@@ -65,7 +64,7 @@ const NewMeasurementForm = ({
           <Autocomplete
             name="client"
             label="Klient"
-            options={clients}
+            options={clients as any}
             formOptionRender="_id"
             optionLabel="name"
             width="40rem"
@@ -103,7 +102,7 @@ const NewMeasurementForm = ({
           <Autocomplete
             name="pal"
             label="Współczynnik aktywności fizycznej (PAL)"
-            options={pal}
+            options={pal as any}
             optionLabel="value"
             formOptionRender="value"
             width="40rem"

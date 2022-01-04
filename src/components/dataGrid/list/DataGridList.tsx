@@ -18,9 +18,6 @@ import EmptyGrid from "../emptyGrid/EmptyGrid";
 //animations
 import { AnimatePresence } from "framer-motion";
 
-//context
-import { useDarkMode } from "@context/darkMode";
-
 //interfaces
 import { IDataGridListProps } from "./DataGridList.interfaces";
 

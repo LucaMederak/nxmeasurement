@@ -12,19 +12,22 @@ export const bmiTypeHelper = (bmi: number) => {
 };
 
 export const ppmHelper = (
-  sex: "mężczyzna" | "kobieta",
-  weight: number,
-  height: number,
-  age: number
+  sex?: "mężczyzna" | "kobieta",
+  weight?: number,
+  height?: number,
+  age?: number
 ) => {
-  if (sex == "mężczyzna") {
+  if (!sex || !weight || !height || !age) {
+    return { ppmHarris: 0, ppmMifflin: 0 };
+  }
+  if (sex === "mężczyzna") {
     const ppm_harris =
       Math.round((66.5 + 13.75 * weight + 5.003 * height - 6.775 * age) * 1e2) /
       1e2;
     const ppm_mifflin =
       Math.round((10 * weight + 6.25 * height - 5 * age + 5) * 1e2) / 1e2;
     return { ppm_harris, ppm_mifflin };
-  } else if (sex == "kobieta") {
+  } else if (sex === "kobieta") {
     const ppm_harris =
       Math.round((655.1 + 9.563 * weight + 1.85 * height - 4.676 * age) * 1e2) /
       1e2;
@@ -36,7 +39,10 @@ export const ppmHelper = (
   return { ppmHarris: 0, ppmMifflin: 0 };
 };
 
-export const cpmHelper = (ppmHarris: number, pal: number) => {
+export const cpmHelper = (ppmHarris?: number, pal?: number) => {
+  if (!ppmHarris || !pal) {
+    return 0;
+  }
   return Math.round(ppmHarris * pal * 1e2) / 1e2;
 };
 

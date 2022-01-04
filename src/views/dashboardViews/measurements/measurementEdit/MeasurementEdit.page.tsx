@@ -126,10 +126,10 @@ const EditMeasurement = () => {
       ymca,
     };
 
-    dispatch(editMeasurement(measurementValues, measurementEditId));
+    dispatch(editMeasurement(measurementValues as any, measurementEditId));
     actions.resetForm();
     actions.setSubmitting(false);
-    navigate("/dashboard/measurements");
+    navigate("/dashboard/clients");
   };
 
   return (

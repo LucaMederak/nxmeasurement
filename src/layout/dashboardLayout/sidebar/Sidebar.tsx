@@ -21,7 +21,10 @@ const Sidebar = () => {
 
   return (
     <Styled.SidebarContainer darkMode={darkMode}>
-      <Styled.SidebarNav onClick={changeSidebarView} sidebarView={sidebarView}>
+      <Styled.SidebarNav
+        onClick={changeSidebarView as any}
+        sidebarView={sidebarView}
+      >
         <Styled.SidebarItemBox>
           <Icon.FaChevronRight />
         </Styled.SidebarItemBox>

@@ -31,8 +31,8 @@ const CheckedPopup = ({ checkedRows, deleteAction }: ICheckedPopupProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = (e: React.ChangeEvent<HTMLDivElement>) => {
-      if (!modalRef.current?.contains(e.target)) {
+    const handler = (e: MouseEvent) => {
+      if (!modalRef.current?.contains(e.target as Node)) {
         setModalOpen(false);
       }
     };
@@ -53,10 +53,10 @@ const CheckedPopup = ({ checkedRows, deleteAction }: ICheckedPopupProps) => {
         exit="hidden"
       >
         <p>{rowsLength()}</p>
-        {/* <Button variant="data-delete-primary" width="15rem">
+        <Button variant="data-delete-primary" width="15rem">
           <Icon.FaTrash />
           usuń
-        </Button> */}
+        </Button>
         <span onClick={() => setModalOpen(true)}>
           <Icon.FaEllipsisV />
         </span>

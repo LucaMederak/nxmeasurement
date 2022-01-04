@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { TDataRows } from "@interfaces/dataGrid.interfaces";
 
 //components
 import Heading from "@components/heading/Heading";
@@ -35,7 +36,7 @@ const ClientList = () => {
       <DataGrid
         loading={loading}
         availableColumns={availableColumns}
-        dataRows={clients}
+        dataRows={clients as any}
         deleteAction={deleteClients}
         linkPage="/dashboard/clients"
       />

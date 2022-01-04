@@ -1,5 +1,4 @@
-import { IChildrenProps } from "@/interfaces/children.interfaces";
-import { ReactElement } from "react";
+import { IChildrenProps } from "@interfaces/childrenProps.interfaces";
 
 export interface IButtonProps {
   children: IChildrenProps["children"];

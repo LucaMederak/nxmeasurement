@@ -1,5 +1,4 @@
 import * as types from "./user.constans";
-import * as sessionTypes from "../session/session.constans";
 import axios from "@utils/api";
 import { AxiosError } from "axios";
 import { Dispatch } from "react";

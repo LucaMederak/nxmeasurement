@@ -3,9 +3,7 @@ export interface ITextareaProps {
   label: string;
   inputProps?: any;
   value?: string;
-  onChange: any;
-  onBlur: any;
-  width: string;
+  width?: string;
 }
 export interface ITextareaError {
   error?: boolean;

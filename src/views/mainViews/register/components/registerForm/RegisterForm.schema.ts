@@ -19,7 +19,9 @@ export const FORM_VALIDATION_SCHEMA: SchemaOf<TRegisterFormValues> =
     email: string()
       .required("To pole jest wymagane")
       .email("Nieprawidłowy adres email"),
-    password: string().required("To pole jest wymagane"),
+    password: string()
+      .required("To pole jest wymagane")
+      .min(6, "Wymagane minimum 6 znaków"),
     passwordConfirmation: string()
       .required("To pole jest wymagane")
       .oneOf([ref("password"), null], "Wprowadzono nieprawidłowe hasło"),

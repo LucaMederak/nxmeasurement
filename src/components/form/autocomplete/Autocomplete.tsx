@@ -26,7 +26,7 @@ const Autocomplete = ({
   formOptionRender,
   width = "100%",
 }: IAutocompleteProps) => {
-  const { setFieldValue, values }: FormikValues = useFormikContext();
+  const { setFieldValue }: FormikValues = useFormikContext();
   const [field, meta] = useField(name);
   const [popup, setPopup] = useState(false);
   const [inputContent, setInputContent] = useState(field.value);
@@ -55,18 +55,29 @@ const Autocomplete = ({
     }
   };
 
-  //close popup helper
-  const listFilter = options.filter(
-    (option) => option[optionLabel] === inputContent
-  );
-
   useEffect(() => {
+    //close popup helper
+    const listFilter = options.filter(
+      (option) => option[optionLabel] === inputContent
+    );
     if (listFilter.length < 1) {
       setFieldValue(name, "");
       setInputContent("");
     }
     return;
   }, [popup]);
+
+  //initial values
+  useEffect(() => {
+    const getOptionLabel = options.find(
+      (option) => option[optionRender] === field.value
+    );
+
+    if (getOptionLabel) {
+      setFieldValue(name, field.value);
+      setInputContent(getOptionLabel[optionLabel]);
+    }
+  }, [options]);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -99,44 +110,8 @@ const Autocomplete = ({
 
   return (
     <Styled.AutocompleteWrapper width={width}>
-      <Styled.TextField
-        {...configProps}
-        ref={popupRef}
-
-        // tabIndex={1}
-        // onFocus={(e) => {
-        //   if (e.currentTarget === e.target) {
-        //     console.log("fokus na sobie");
-        //     setPopup(true);
-        //   } else {
-        //     console.log("fokus na elemencie potomnym", e.target);
-        //     // setPopup(true);
-        //     setPopup(true);
-        //   }
-        //   // if (!e.currentTarget.contains(e.relatedTarget)) {
-        //   //   // Not triggered when swapping focus between children
-        //   //   // setPopup(true);
-        //   //   console.log("focus aktywny poza poddrzewem");
-        //   // }
-        // }}
-        // onBlur={(e) => {
-        //   if (e.currentTarget === e.target) {
-        //     console.log("fokus utracony na sobie");
-        //     setPopup(true);
-        //   } else {
-        //     console.log("fokus utracony na elemencie potomnym", e.target);
-        //     setPopup(true);
-        //   }
-        //   // if (!e.currentTarget.contains(e.relatedTarget)) {
-        //   //   // Not triggered when swapping focus between children
-        //   //   console.log("fokus poza poddrzewem");
-        //   //   setPopup(false);
-        //   // }
-        // }}
-      >
+      <Styled.TextField {...configProps} ref={popupRef}>
         <input
-          // name={name}
-          // type="search"
           autoComplete="off"
           placeholder=" "
           onChange={(e) => setInputContent(e.target.value)}

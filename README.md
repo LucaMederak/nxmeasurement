@@ -1,5 +1,13 @@
 <h1 align="center">NXMeasurement</h1>
 
+![nxmeasurement-home](./public/home-page.png)
+
+![nxmeasurement-profile](./public/profile-page.png)
+
+![nxmeasurement-list](./public/measurement-page.png)
+
+![nxmeasurement-new](./public/new-measurement.png)
+
 ## Project Overview
 
 The NxMeasurement application is used to create body weight measurements. In the application, you can add clients, create and analyze body weight measurements. The javascript - react library was used to build the application together with other libraries listed below.

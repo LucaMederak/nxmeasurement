@@ -6,6 +6,7 @@ import format from "date-fns/format";
 //components
 import Heading from "@components/heading/Heading";
 import DataGrid from "@components/dataGrid/DataGrid";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getMeasurements } from "@redux/measurements/measurements.actions";
@@ -25,15 +26,19 @@ const availableColumns = [
 ];
 
 const MeasurementList = () => {
-  const { measurements, loading: measurementsLoading } = useSelector(
-    (state: State) => state.measurements
-  );
+  const {
+    measurements,
+    loading: measurementsLoading,
+    error: measurementsError,
+  } = useSelector((state: State) => state.measurements);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMeasurements());
   }, []);
+
+  if (measurementsError) return <ErrorWrapper />;
 
   const modifyMeasurements = measurements.map(
     (data) =>

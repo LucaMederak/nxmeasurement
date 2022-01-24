@@ -12,6 +12,7 @@ import Heading from "@components/heading/Heading";
 import NewMeasurementForm from "../components/form/MeasurementForm";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import ClientsNotFound from "../components/clientsNotFound/ClientsNotFound";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -54,9 +55,11 @@ const initialFormValues: IInitialValues = {
 };
 
 const NewMeasurement = () => {
-  const { clients, loading: clientsLoading } = useSelector(
-    (state: State) => state.clients
-  );
+  const {
+    clients,
+    loading: clientsLoading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,6 +69,7 @@ const NewMeasurement = () => {
   }, []);
 
   if (clientsLoading) return <PageLoading />;
+  if (clientsError) return <ErrorWrapper />;
   if (!clientsLoading && clients.length < 1) return <ClientsNotFound />;
 
   const handleSubmit = (

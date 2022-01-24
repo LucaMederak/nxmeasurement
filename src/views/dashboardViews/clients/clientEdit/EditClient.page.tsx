@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router";
 import Heading from "@components/heading/Heading";
 import ClientForm from "../components/form/ClientForm";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getClients, editClient } from "@redux/clients/clients.actions";
@@ -23,7 +24,11 @@ import { FormikHelpers } from "formik";
 const EditClient = () => {
   const { clientEditId } = useParams();
   const navigate = useNavigate();
-  const { clients, loading } = useSelector((state: State) => state.clients);
+  const {
+    clients,
+    loading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,6 +36,7 @@ const EditClient = () => {
   }, []);
 
   if (loading || !clientEditId) return <PageLoading />;
+  if (clientsError) return <ErrorWrapper />;
 
   const client = clients.find(({ _id }) => _id === clientEditId);
   if (!client) return <NotFoundPage />;

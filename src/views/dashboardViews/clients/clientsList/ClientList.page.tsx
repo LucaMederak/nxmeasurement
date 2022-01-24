@@ -4,6 +4,7 @@ import { TDataRows } from "@interfaces/dataGrid.interfaces";
 //components
 import Heading from "@components/heading/Heading";
 import DataGrid from "@components/dataGrid/DataGrid";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getClients } from "@redux/clients/clients.actions";
@@ -18,13 +19,19 @@ const availableColumns = [
 ];
 
 const ClientList = () => {
-  const { clients, loading } = useSelector((state: State) => state.clients);
+  const {
+    clients,
+    loading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getClients());
   }, []);
+
+  if (clientsError) return <ErrorWrapper />;
 
   const deleteClients = () => {
     return;

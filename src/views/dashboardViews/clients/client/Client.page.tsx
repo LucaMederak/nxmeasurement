@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router";
 import Heading from "@components/heading/Heading";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import Button from "@components/button/Button";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getClients, deleteClient } from "@redux/clients/clients.actions";
@@ -23,7 +24,11 @@ import * as Styled from "./Client.styles";
 const Client = () => {
   const { clientId } = useParams();
   const navigate = useNavigate();
-  const { clients, loading } = useSelector((state: State) => state.clients);
+  const {
+    clients,
+    loading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,6 +36,7 @@ const Client = () => {
   }, []);
 
   if (loading || !clientId) return <PageLoading />;
+  if (clientsError) return <ErrorWrapper />;
 
   const client = clients.find(({ _id }) => _id === clientId);
   if (!client) return <NotFoundPage />;

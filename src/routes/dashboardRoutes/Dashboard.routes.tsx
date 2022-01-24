@@ -9,17 +9,16 @@ import PageLoading from "@components/loading/pageLoading/PageLoading";
 import ClientsRoutes from "./Client.routes";
 import MeasurementRoutes from "./Measurement.routes";
 import ProfileRoutes from "./Profile.routes";
+import NotFoundPage from "@views/mainViews/notFound/NotFound.page";
 
 //redux
 import { State } from "@redux/reducers";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const {
-    user,
-    loading: userLoading,
-    error: userError,
-  } = useSelector((state: State) => state.user);
+  const { user, loading: userLoading } = useSelector(
+    (state: State) => state.user
+  );
 
   if (userLoading) {
     return <PageLoading />;
@@ -35,6 +34,7 @@ const Dashboard = () => {
         <Route path="clients/*" element={<ClientsRoutes />} />
         <Route path="profile/*" element={<ProfileRoutes />} />
         <Route path="measurements/*" element={<MeasurementRoutes />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </DashboardLayout>
   );

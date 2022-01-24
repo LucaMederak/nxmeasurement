@@ -19,18 +19,6 @@ const Profile = () => {
 
   if (loading) return <PageLoading />;
 
-  const avatarRender = () => {
-    // if (user?.avatar) {
-    //   return <img src={user.avatar} />;
-    // }
-
-    return (
-      <span>
-        <Icon.FaUser />
-      </span>
-    );
-  };
-
   return (
     <>
       <Heading title="Profil" />
@@ -49,7 +37,11 @@ const Profile = () => {
             <p>{user?.email}</p>
           </Styled.ProfileInfoItem>
         </Styled.ProfileInfoWrapper>
-        <Styled.AvatarWrapper>{avatarRender()}</Styled.AvatarWrapper>
+        <Styled.AvatarWrapper>
+          <span>
+            <Icon.FaUser />
+          </span>
+        </Styled.AvatarWrapper>
       </Styled.ProfileContainer>
     </>
   );

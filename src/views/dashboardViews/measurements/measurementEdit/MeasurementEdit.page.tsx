@@ -12,6 +12,7 @@ import Heading from "@components/heading/Heading";
 import MeasurementForm from "../components/form/MeasurementForm";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import ClientsNotFound from "../components/clientsNotFound/ClientsNotFound";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -43,12 +44,16 @@ const EditMeasurement = () => {
   const { measurementEditId } = useParams();
   const navigate = useNavigate();
 
-  const { clients, loading: clientsLoading } = useSelector(
-    (state: State) => state.clients
-  );
-  const { measurements, loading: measurementsLoading } = useSelector(
-    (state: State) => state.measurements
-  );
+  const {
+    clients,
+    loading: clientsLoading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
+  const {
+    measurements,
+    loading: measurementsLoading,
+    error: measurementsError,
+  } = useSelector((state: State) => state.measurements);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,12 +63,14 @@ const EditMeasurement = () => {
 
   //get measurement
   if (measurementsLoading || !measurementEditId) return <PageLoading />;
+  if (measurementsError) return <ErrorWrapper />;
 
   const measurement = measurements.find(({ _id }) => _id === measurementEditId);
   if (!measurement) return <NotFoundPage />;
 
   //clients
   if (clientsLoading) return <PageLoading />;
+  if (clientsError) return <ErrorWrapper />;
   if (!clientsLoading && clients.length < 1) return <ClientsNotFound />;
 
   const initialFormValues: IInitialValues = {

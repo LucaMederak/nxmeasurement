@@ -8,6 +8,7 @@ import format from "date-fns/format";
 import Heading from "@components/heading/Heading";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import Button from "@components/button/Button";
+import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getClients } from "@redux/clients/clients.actions";
@@ -30,12 +31,16 @@ import * as Styled from "./Measurement.styles";
 const Client = () => {
   const { measurementId } = useParams();
   const navigate = useNavigate();
-  const { measurements, loading: measurementsLoading } = useSelector(
-    (state: State) => state.measurements
-  );
-  const { clients, loading: clientsLoading } = useSelector(
-    (state: State) => state.clients
-  );
+  const {
+    measurements,
+    loading: measurementsLoading,
+    error: measurementsError,
+  } = useSelector((state: State) => state.measurements);
+  const {
+    clients,
+    loading: clientsLoading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
 
   const dispatch = useDispatch();
 
@@ -45,11 +50,16 @@ const Client = () => {
   }, []);
 
   if (measurementsLoading || !measurementId) return <PageLoading />;
+  if (measurementsError) return <ErrorWrapper />;
 
   const measurement = measurements.find(({ _id }) => _id === measurementId);
   if (!measurement) return <NotFoundPage />;
 
   const measurementDate = format(new Date(measurement.createdAt), "dd.MM.yyyy");
+
+  if (clientsLoading) return <PageLoading />;
+  if (clientsError) return <ErrorWrapper />;
+
   const measurementClient = () => {
     const measurementClient = clients.find(
       ({ _id }) => _id === measurement.client

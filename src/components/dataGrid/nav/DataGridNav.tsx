@@ -18,6 +18,7 @@ const DataGridNav = ({
   setQuery,
   data,
   linkPage,
+  setExportPopupDisplay,
 }: IDataGridNavProps) => {
   const navigate = useNavigate();
   return (
@@ -31,7 +32,7 @@ const DataGridNav = ({
         />
       </Styled.SearchWrapper>
       <Styled.ButtonsWrapper>
-        {/* {data.length > 0 && (
+        {data.length > 0 && (
           <Button
             variant="data-secondary"
             onClick={() => setExportPopupDisplay(true)}
@@ -39,7 +40,7 @@ const DataGridNav = ({
             <Icon.FaFileExport />
             Eksportuj
           </Button>
-        )} */}
+        )}
         <Button
           onClick={() => navigate(`${linkPage}/new`)}
           variant="data-primary"

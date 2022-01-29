@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import DataGridNav from "./nav/DataGridNav";
 import DataGridList from "./list/DataGridList";
 import LoadingGrid from "./loadingGrid/LoadingGrid";
+import ExportPopup from "./exportPopup/ExportPopup";
 
 //interfaces
 import { IDataGridProps } from "./DataGrid.interfaces";
@@ -17,6 +18,9 @@ const DataGrid = ({
   deleteAction,
 }: IDataGridProps) => {
   if (loading) return <LoadingGrid />;
+
+  //export data popup
+  const [exportPopupDisplay, setExportPopupDisplay] = useState<boolean>(false);
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,6 +83,7 @@ const DataGrid = ({
         setQuery={setQuery}
         data={dataRows}
         linkPage={linkPage}
+        setExportPopupDisplay={setExportPopupDisplay}
       />
       <DataGridList
         availableColumns={availableColumns}
@@ -89,6 +94,13 @@ const DataGrid = ({
         linkPage={linkPage}
         deleteAction={deleteAction}
       />
+      {exportPopupDisplay && (
+        <ExportPopup
+          setExportPopupDisplay={setExportPopupDisplay}
+          availableColumns={availableColumns}
+          dataRows={dataRows}
+        />
+      )}
     </>
   );
 };

@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { IDarkMode } from "@interfaces/darkmode.interfaces";
-
 interface ISidebarView {
   sidebarView: boolean;
 }
@@ -10,15 +8,10 @@ const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
 `;
 
 const PageContainer = styled.div(
-  ({
-    theme: {
-      media: { breakpoints, down },
-    },
-  }) => css`
+  () => css`
     display: flex;
     width: 100%;
     position: relative;
@@ -39,7 +32,7 @@ const PageRenderBox = styled.div<ISidebarView>(
     flex-direction: column;
     width: calc(100% - 26rem);
     padding: 6rem;
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 6.1rem);
     background: ${palette.common.background};
     position: absolute;
     top: 0;

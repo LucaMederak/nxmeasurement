@@ -14,10 +14,11 @@ const NavContainer = styled.nav(
   }) => css`
     display: flex;
     flex-direction: column;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 2;
+    width: 100%;
   `
 );
 

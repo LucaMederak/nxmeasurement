@@ -32,7 +32,8 @@ const PageRenderBox = styled.div<ISidebarView>(
     flex-direction: column;
     width: calc(100% - 26rem);
     padding: 6rem;
-    min-height: calc(100vh - 6.1rem);
+    padding-top: 12rem;
+    min-height: 100vh;
     background: ${palette.common.background};
     position: absolute;
     top: 0;
@@ -46,16 +47,19 @@ const PageRenderBox = styled.div<ISidebarView>(
 
     ${down(breakpoints.md)} {
       padding: 6rem;
+      padding-top: 16rem;
       position: static;
       width: 100%;
     }
 
     ${down(breakpoints.sm)} {
       padding: 6rem ${padding.sm};
+      padding-top: 16rem;
     }
 
     ${down(breakpoints.xs)} {
       padding: 6rem ${padding.xs};
+      padding-top: 16rem;
     }
   `
 );

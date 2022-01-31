@@ -15,7 +15,7 @@ const PopupContainer = styled.div(
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 6.1rem);
+    height: 100vh;
     background: rgba(35, 45, 55, 0.37);
     z-index: 1;
     padding: 20rem 7rem;
@@ -23,13 +23,13 @@ const PopupContainer = styled.div(
     overflow-y: auto;
 
     ${down(breakpoints.md)} {
-      padding: 10rem 4rem;
+      padding: 16rem 4rem;
     }
     ${down(breakpoints.sm)} {
-      padding: 10rem ${padding.sm};
+      padding: 16rem ${padding.sm};
     }
     ${down(breakpoints.sm)} {
-      padding: 6rem ${padding.xs};
+      padding: 16rem ${padding.xs};
     }
   `
 );

@@ -96,6 +96,7 @@ const DataGrid = ({
       />
       {exportPopupDisplay && (
         <ExportPopup
+          popupDisplay={exportPopupDisplay}
           setExportPopupDisplay={setExportPopupDisplay}
           availableColumns={availableColumns}
           dataRows={dataRows}

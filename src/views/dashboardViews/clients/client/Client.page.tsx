@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 
 //components
@@ -6,6 +6,7 @@ import Heading from "@components/heading/Heading";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import Button from "@components/button/Button";
 import ErrorWrapper from "@components/error/ErrorWrapper";
+import DeletePopup from "@components/popup/deletePopup/DeletePopup";
 
 //redux
 import { getClients, deleteClient } from "@redux/clients/clients.actions";
@@ -22,6 +23,7 @@ import * as Icon from "@icons/icons";
 import * as Styled from "./Client.styles";
 
 const Client = () => {
+  const [openDeletePopup, setOpenDeletePopup] = useState<boolean>(false);
   const { clientId } = useParams();
   const navigate = useNavigate();
   const {
@@ -62,7 +64,7 @@ const Client = () => {
         <Button
           variant="data-delete-primary"
           width="30rem"
-          onClick={handleDeleteClient}
+          onClick={() => setOpenDeletePopup(true)}
         >
           <Icon.FaTrash />
           Usuń
@@ -97,6 +99,14 @@ const Client = () => {
           </span>
         </Styled.AvatarWrapper>
       </Styled.ClientContainer>
+      {openDeletePopup && (
+        <DeletePopup
+          openPopup={openDeletePopup}
+          setOpenPopup={setOpenDeletePopup}
+          action={handleDeleteClient}
+          itemName={client.name + " " + client.last_name}
+        />
+      )}
     </>
   );
 };

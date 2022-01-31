@@ -7,6 +7,8 @@ import {
   IFormValues,
 } from "../components/form/MeasurementForm.interfaces";
 
+import { getMeasurementClientFullName } from "@helpers/client.helpers";
+
 //components
 import Heading from "@components/heading/Heading";
 import NewMeasurementForm from "../components/form/MeasurementForm";
@@ -68,9 +70,16 @@ const NewMeasurement = () => {
     dispatch(getClients());
   }, []);
 
-  if (clientsLoading) return <PageLoading />;
   if (clientsError) return <ErrorWrapper />;
   if (!clientsLoading && clients.length < 1) return <ClientsNotFound />;
+
+  const clientsList = () => {
+    const modifyClients = clients.map((data) => ({
+      ...data,
+      client: getMeasurementClientFullName(clients, clientsLoading, data._id),
+    }));
+    return modifyClients;
+  };
 
   const handleSubmit = (
     values: IFormValues,
@@ -88,6 +97,7 @@ const NewMeasurement = () => {
 
       return { age: undefined, sex: undefined };
     };
+
     const { age, sex } = clientInfo();
 
     const bmi = bmiHelper(weight, height);
@@ -121,7 +131,7 @@ const NewMeasurement = () => {
     <>
       <Heading title="Nowy pomiar" parentPage="/dashboard/measurements" />
       <NewMeasurementForm
-        clients={clients}
+        clients={clientsList()}
         initialValues={initialFormValues}
         handleSubmit={handleSubmit}
       />

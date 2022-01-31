@@ -10,11 +10,14 @@ import ErrorWrapper from "@components/error/ErrorWrapper";
 
 //redux
 import { getMeasurements } from "@redux/measurements/measurements.actions";
+import { getClients } from "@redux/clients/clients.actions";
 import { useSelector, useDispatch } from "react-redux";
 import { State } from "@redux/reducers";
 
+import { getMeasurementClientFullName } from "@helpers/client.helpers";
+
 const availableColumns = [
-  { label: "nazwa", key: "name" },
+  { label: "klient", key: "client" },
   { label: "data", key: "createdAt" },
   { label: "masa ciała", key: "weight" },
   { label: "wysokość ciała", key: "height" },
@@ -32,21 +35,34 @@ const MeasurementList = () => {
     error: measurementsError,
   } = useSelector((state: State) => state.measurements);
 
+  const {
+    clients,
+    loading: clientsLoading,
+    error: clientsError,
+  } = useSelector((state: State) => state.clients);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMeasurements());
+    dispatch(getClients());
   }, []);
 
-  if (measurementsError) return <ErrorWrapper />;
+  if (measurementsError || clientsError) return <ErrorWrapper />;
 
-  const modifyMeasurements = measurements.map(
-    (data) =>
-      data && {
-        ...data,
-        createdAt: format(new Date(data.createdAt), "dd.MM.yyyy"),
-      }
-  );
+  const measurementList = () => {
+    const modifyMeasurements = measurements.map((data) => ({
+      ...data,
+      createdAt: format(new Date(data.createdAt), "dd.MM.yyyy"),
+      client: getMeasurementClientFullName(
+        clients,
+        clientsLoading,
+        data.client
+      ),
+    }));
+
+    return modifyMeasurements;
+  };
 
   const deleteMeasurements = () => {
     return;
@@ -58,7 +74,7 @@ const MeasurementList = () => {
       <DataGrid
         loading={measurementsLoading}
         availableColumns={availableColumns}
-        dataRows={modifyMeasurements}
+        dataRows={measurementList()}
         deleteAction={deleteMeasurements}
         linkPage="/dashboard/measurements"
       />

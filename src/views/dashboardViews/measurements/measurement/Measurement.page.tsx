@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 
 //date-fns
 import format from "date-fns/format";
+
+import { getMeasurementClientFullName } from "@helpers/client.helpers";
 
 //components
 import Heading from "@components/heading/Heading";
 import PageLoading from "@components/loading/pageLoading/PageLoading";
 import Button from "@components/button/Button";
 import ErrorWrapper from "@components/error/ErrorWrapper";
+import DeletePopup from "@components/popup/deletePopup/DeletePopup";
 
 //redux
 import { getClients } from "@redux/clients/clients.actions";
@@ -29,6 +32,7 @@ import * as Icon from "@icons/icons";
 import * as Styled from "./Measurement.styles";
 
 const Client = () => {
+  const [openDeletePopup, setOpenDeletePopup] = useState<boolean>(false);
   const { measurementId } = useParams();
   const navigate = useNavigate();
   const {
@@ -60,16 +64,6 @@ const Client = () => {
   if (clientsLoading) return <PageLoading />;
   if (clientsError) return <ErrorWrapper />;
 
-  const measurementClient = () => {
-    const measurementClient = clients.find(
-      ({ _id }) => _id === measurement.client
-    );
-    if (measurementClient) {
-      return measurementClient.name + " " + measurementClient.last_name;
-    }
-    return;
-  };
-
   const handleDeleteMeasurement = () => {
     dispatch(deleteMeasurement(measurement._id));
     navigate("/dashboard/measurements");
@@ -78,7 +72,6 @@ const Client = () => {
   return (
     <>
       <Heading title="Pomiar" parentPage="/dashboard/measurements" />
-
       <Styled.ButtonsWrapper>
         <Button
           variant="data-secondary"
@@ -94,7 +87,7 @@ const Client = () => {
         <Button
           variant="data-delete-primary"
           width="30rem"
-          onClick={handleDeleteMeasurement}
+          onClick={() => setOpenDeletePopup(true)}
         >
           <Icon.FaTrash />
           Usuń
@@ -112,7 +105,13 @@ const Client = () => {
         </Styled.MeasurementInfoItem>
         <Styled.MeasurementInfoItem>
           <h2>klient</h2>
-          <p>{measurementClient()}</p>
+          <p>
+            {getMeasurementClientFullName(
+              clients,
+              clientsLoading,
+              measurement.client
+            )}
+          </p>
         </Styled.MeasurementInfoItem>
         <Styled.MeasurementInfoItem>
           <h2>masa ciała (kg)</h2>
@@ -199,6 +198,15 @@ const Client = () => {
           <p>{measurement.notes || "-"}</p>
         </Styled.MeasurementInfoItem>
       </Styled.MeasurementContainer>
+
+      {openDeletePopup && (
+        <DeletePopup
+          openPopup={openDeletePopup}
+          setOpenPopup={setOpenDeletePopup}
+          action={handleDeleteMeasurement}
+          itemName={measurement.name}
+        />
+      )}
     </>
   );
 };

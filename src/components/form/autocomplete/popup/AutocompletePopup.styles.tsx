@@ -13,7 +13,7 @@ const PopupContainer = styled.ul<IDarkMode>`
   background: white;
   width: 100%;
   border-radius: 0.5rem;
-  z-index: 3;
+  z-index: 1;
   box-shadow: 0px 4px 4px rgba(197, 197, 197, 0.25);
   list-style: none;
   max-height: 30rem;

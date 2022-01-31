@@ -7,6 +7,8 @@ import {
   IFormValues,
 } from "../components/form/MeasurementForm.interfaces";
 
+import { getMeasurementClientFullName } from "@helpers/client.helpers";
+
 //components
 import Heading from "@components/heading/Heading";
 import MeasurementForm from "../components/form/MeasurementForm";
@@ -69,9 +71,16 @@ const EditMeasurement = () => {
   if (!measurement) return <NotFoundPage />;
 
   //clients
-  if (clientsLoading) return <PageLoading />;
   if (clientsError) return <ErrorWrapper />;
   if (!clientsLoading && clients.length < 1) return <ClientsNotFound />;
+
+  const clientsList = () => {
+    const modifyClients = clients.map((data) => ({
+      ...data,
+      client: getMeasurementClientFullName(clients, clientsLoading, data._id),
+    }));
+    return modifyClients;
+  };
 
   const initialFormValues: IInitialValues = {
     client: measurement.client,
@@ -143,7 +152,7 @@ const EditMeasurement = () => {
     <>
       <Heading title="Pomiar" parentPage="/dashboard/measurements" />
       <MeasurementForm
-        clients={clients}
+        clients={clientsList()}
         initialValues={initialFormValues}
         handleSubmit={handleSubmit}
       />

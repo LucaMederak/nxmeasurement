@@ -66,7 +66,7 @@ const NewMeasurementForm = ({
             label="Klient"
             options={clients as any}
             formOptionRender="_id"
-            optionLabel="name"
+            optionLabel="client"
             width="40rem"
           />
 

@@ -8,10 +8,10 @@ import { Formik, FormikHelpers } from "formik";
 import {
   INITIAL_FORM_VALUES,
   FORM_VALIDATION_SCHEMA,
-} from "./LoginForm.schema";
+} from "./RegisterForm.schema";
 
 //interfaces
-import { TLoginFormValues } from "./LoginForm.interfaces";
+import { TRegisterFormValues } from "./RegisterForm.interfaces";
 
 //components
 import FormHeading from "@components/form/heading/FormHeading";
@@ -20,29 +20,28 @@ import ReactLoading from "react-loading";
 import TextField from "@components/form/textField/TextField";
 
 //styles
-import * as Styled from "./LoginForm.styles";
+import * as Styled from "./RegisterForm.styles";
 
 //redux
-import { loginUser } from "@redux/user/user.actions";
+import { createUser } from "@redux/user/user.actions";
 import { useDispatch } from "react-redux";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (
-    values: TLoginFormValues,
-    actions: FormikHelpers<TLoginFormValues>
+    values: TRegisterFormValues,
+    actions: FormikHelpers<TRegisterFormValues>
   ) => {
-    dispatch(loginUser(values));
-    actions.resetForm();
+    dispatch(createUser(values));
     actions.setSubmitting(false);
   };
 
   return (
     <Styled.FormContainer>
       <FormHeading
-        title="Logowanie do konta NxMeasurement"
-        description="Witaj ponownie, zaloguj się za pomocą adresu email i hasła"
+        title="Załóż konto NXMeasurement"
+        description="Witaj w aplikacji NXMeasurement, załóż konto i dodawaj pomiary Twoich klientów"
       />
       <Formik
         initialValues={{
@@ -53,8 +52,17 @@ const LoginForm = () => {
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Styled.FormWrapper>
+            <TextField name="name" label="Imię" type="text" />
+            <TextField name="last_name" label="Nazwisko" type="text" />
             <TextField name="email" label="E-mail" type="email" />
+
             <TextField name="password" label="Hasło" type="password" />
+            <TextField
+              name="passwordConfirmation"
+              label="Potwierdź hasło"
+              type="password"
+            />
+
             <Button
               type="submit"
               variant={
@@ -64,12 +72,11 @@ const LoginForm = () => {
               {isSubmitting ? (
                 <ReactLoading type="spin" color="blue" width={20} height={20} />
               ) : (
-                "Zaloguj się"
+                "Załóż konto"
               )}
             </Button>
-
-            <p>Nie masz jeszcze konta?</p>
-            <Link to="/register">Załóż konto</Link>
+            <p>Masz już konto?</p>
+            <Link to="/auth/login">Zaloguj się</Link>
           </Styled.FormWrapper>
         )}
       </Formik>
@@ -77,4 +84,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

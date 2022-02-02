@@ -9,6 +9,7 @@ import { useDarkMode } from "@context/darkMode";
 
 //routes
 import MainRoutes from "@routes/mainRoutes/Main.routes";
+import AuthRoutes from "@routes/authRoutes/Auth.routes";
 import ProtectedRoutes from "@routes/dashboardRoutes/Dashboard.routes";
 
 //redux
@@ -38,6 +39,7 @@ const App = () => {
           <Router>
             <Routes>
               <Route path="/*" element={<MainRoutes />} />
+              <Route path="/auth/*" element={<AuthRoutes />} />
               <Route path="/dashboard/*" element={<ProtectedRoutes />} />
             </Routes>
           </Router>

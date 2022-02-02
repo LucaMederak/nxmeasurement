@@ -64,7 +64,7 @@ const IntroSection = () => {
             </motion.li>
           ))}
         </Styled.IntroFeaturesWrapper>
-        <Button onClick={() => navigate("/register")} width="40rem">
+        <Button onClick={() => navigate("/auth/register")} width="40rem">
           Załóż konto
         </Button>
       </Styled.IntroMainHeadlineWrapper>

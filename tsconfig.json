@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
@@ -23,11 +19,5 @@
     "baseUrl": "./src"
   },
   "extends": "./tsconfig.paths.json",
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx",
-    "jest.config.js",
-    "craco.config.js"
-  ]
+  "include": ["src", "**/*.ts", "**/*.tsx", "jest.config.js", "craco.config.js"]
 }
